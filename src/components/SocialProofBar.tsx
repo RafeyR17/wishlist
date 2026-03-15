@@ -49,39 +49,46 @@ const stats = [
 
 export const SocialProofBar = () => {
   return (
-    <section className="bg-white/[0.02] border-y border-white/[0.06] py-12 md:py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0">
+    <section className="relative bg-[#020810] py-16 md:py-24 overflow-hidden">
+      {/* Background Atmosphere */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-brand-accent/20 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8">
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex flex-col items-center text-center relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.15,
+                ease: [0.21, 0.47, 0.32, 0.98] 
+              }}
+              className="flex flex-col items-center text-center group"
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-[32px] font-medium text-white mb-2"
-              >
-                <Counter value={stat.value} />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                className="text-[13px] text-text-muted max-w-[140px]"
-              >
+              <div className="relative mb-3">
+                <div className="absolute inset-0 bg-brand-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150" />
+                <div className="text-[42px] md:text-[56px] font-bold text-white tracking-tighter leading-none relative z-10 transition-transform duration-500 group-hover:scale-105">
+                  <Counter value={stat.value} />
+                </div>
+              </div>
+              
+              <div className="h-px w-8 bg-brand-accent/30 mb-4 transition-all duration-500 group-hover:w-16 group-hover:bg-brand-accent" />
+              
+              <div className="text-[14px] md:text-[15px] font-medium text-text-secondary uppercase tracking-[0.2em] max-w-[160px] transition-colors duration-500 group-hover:text-white">
                 {stat.label}
-              </motion.div>
-              {index < stats.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-8 w-px bg-white/[0.08]" />
-              )}
-            </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Subtle bottom divider */}
+      <div className="absolute bottom-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
     </section>
   );
 };

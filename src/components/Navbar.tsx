@@ -20,7 +20,7 @@ export const Navbar = () => {
 
       <div className="hidden md:block">
         <button
-          className="px-5 py-2 rounded-button border border-brand-accent text-brand-accent text-sm font-medium transition-all duration-150 hover:bg-brand-accent hover:text-brand-navy"
+          className="px-5 py-2 rounded-[6px] border border-brand-accent text-brand-accent text-sm font-medium transition-all duration-150 hover:bg-brand-accent hover:text-brand-navy"
           onClick={() => {
             document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" });
           }}
